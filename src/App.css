@@ -11,9 +11,9 @@ body, .app {
 /* main page */
 
 .list-books-title {
-  padding: 10px 0;
+  padding: 10px 20px;
   background: #2e7c31;
-  text-align: center;
+  text-align: left;
 }
 .list-books-title h1 {
   font-weight: 400;

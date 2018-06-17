@@ -4,18 +4,22 @@ import './App.css'
 
 const bookshelves = [
   {
+    id : 'currently-reading',
     title: "Currently Reading",
   },
   {
+    id : 'want-to-read',
     title: "Want to Read",
   },
   {
+    id : 'read',
     title: "Read",
   }
 ];
 
 const books = [
   {
+    id : '1',
     title: "To Kill a Mockingbird",
     author: "Harper Lee",
     cover: {
@@ -25,6 +29,7 @@ const books = [
     }
   },
   {
+    id : '2',
     title: "Ender's Game",
     author: "Orson Scott Card",
     cover: {
@@ -98,7 +103,7 @@ const Bookshelves = (props) => {
 
   return (
     bookshelves.map((bookshelf) => (
-      <Bookshelf bookshelf={bookshelf}/>
+      <Bookshelf key={bookshelf.id} bookshelf={bookshelf}/>
     ))
   )
 
@@ -126,7 +131,7 @@ const Books = (props) => {
       <ol className="books-grid">
         {
           books.map((book) => (
-            <Book book={book}/>
+            <Book key={book.id} book={book}/>
           ))
         }
       </ol>

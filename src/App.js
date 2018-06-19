@@ -1,25 +1,26 @@
 import React from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
+import Bookshelves from './Bookshelves'
 
 const bookshelves = [
   {
-    id : 'currently-reading',
+    id: 'currently-reading',
     title: "Currently Reading",
   },
   {
-    id : 'want-to-read',
+    id: 'want-to-read',
     title: "Want to Read",
   },
   {
-    id : 'read',
+    id: 'read',
     title: "Read",
   }
 ];
 
 const books = [
   {
-    id : '1',
+    id: '1',
     title: "To Kill a Mockingbird",
     author: "Harper Lee",
     cover: {
@@ -29,7 +30,7 @@ const books = [
     }
   },
   {
-    id : '2',
+    id: '2',
     title: "Ender's Game",
     author: "Orson Scott Card",
     cover: {
@@ -84,7 +85,7 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
-              <Bookshelves bookshelves={bookshelves}/>
+              <Bookshelves bookshelves={bookshelves} books={books}/>
             </div>
             <div className="open-search">
               <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
@@ -96,77 +97,5 @@ class BooksApp extends React.Component {
   }
 
 }
-
-const Bookshelves = (props) => {
-
-  const { bookshelves } = props;
-
-  return (
-    bookshelves.map((bookshelf) => (
-      <Bookshelf key={bookshelf.id} bookshelf={bookshelf}/>
-    ))
-  )
-
-};
-
-const Bookshelf = (props) => {
-
-  const { bookshelf } = props;
-
-  return (
-    <div className="bookshelf">
-      <h2 className="bookshelf-title">{bookshelf.title}</h2>
-      <Books books={books}/>
-    </div>
-  )
-
-};
-
-const Books = (props) => {
-
-  const { books } = props;
-
-  return (
-    <div className="bookshelf-books">
-      <ol className="books-grid">
-        {
-          books.map((book) => (
-            <Book key={book.id} book={book}/>
-          ))
-        }
-      </ol>
-    </div>
-  )
-
-};
-
-const Book = (props) => {
-
-  const { book } = props;
-
-  return (
-    <li>
-      <div className="book">
-        <div className="book-top">
-          <div className="book-cover" style={book.cover}>
-
-          </div>
-          <div className="book-shelf-changer">
-            <select>
-              <option value="move" disabled>Move to...</option>
-              <option value="currentlyReading">Currently Reading</option>
-              <option value="wantToRead">Want to Read</option>
-              <option value="read">Read</option>
-              <option value="none">None</option>
-            </select>
-          </div>
-        </div>
-        <div className="book-title">{book.title}</div>
-        <div className="book-authors">{book.author}</div>
-      </div>
-    </li>
-  )
-
-};
 
 export default BooksApp

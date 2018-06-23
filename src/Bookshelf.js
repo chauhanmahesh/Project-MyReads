@@ -1,23 +1,34 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Books from './Books'
 import PropTypes from 'prop-types'
 
-const Bookshelf = (props) => {
+class Bookshelf extends Component {
 
-  const { bookshelf, books } = props;
+  render() {
+    const { bookshelf, books, handleShelfUpdate } = this.props;
+    return (
+      <div className="bookshelf">
+        <h2 className="bookshelf-title">{bookshelf.title}</h2>
+        {
+          books.length === 0 ? (
+            <div className="empty-shelf-message">
+              {bookshelf.emptyMessage}
+            </div>
+          ) : (
+            <Books books={books} handleShelfUpdate={handleShelfUpdate}/>
+          )
+        }
+      </div>
+    )
+  }
 
-  return (
-    <div className="bookshelf">
-      <h2 className="bookshelf-title">{bookshelf.title}</h2>
-      <Books books={books}/>
-    </div>
-  )
+}
 
-};
-
-Bookshelf.PropTypes = {
+// Defining propTypes.
+Bookshelf.propTypes = {
   bookshelf: PropTypes.object.isRequired,
-  books: PropTypes.array.isRequired
+  books: PropTypes.array.isRequired,
+  handleShelfUpdate: PropTypes.func.isRequired
 };
 
 export default Bookshelf

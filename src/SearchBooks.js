@@ -22,6 +22,9 @@ class SearchBooks extends Component {
 
   /**
    * @description Updates the search query based on what user types.
+   *
+   * I referred https://stackoverflow.com/questions/42217121/searching-in-react-when-user-stops-typing for timeout logic.
+   *
    * @param {string} query
    * @param {boolean} withDelay - whether we want to delay the search API call or not. If yes, we will wait for 300ms
    *   before making search API call. This is to optimize the app performance and to avoid excess API calls.

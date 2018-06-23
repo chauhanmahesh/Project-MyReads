@@ -1,17 +1,22 @@
-import React, { Component } from 'react'
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from "prop-types"
 import Author from './Author'
-import BookShelfChanger from "./BookShelfChanger";
+import BookShelfChanger from "./BookShelfChanger"
+import * as BooksAPI from "./BooksAPI"
 
-class Book extends Component {
+class Book extends React.PureComponent {
 
+  /**
+   * @description Prepares the Book object with the properties which we need to render it on screen.
+   * @returns {Object} book object which needs to be rendered.
+   */
   getBookDetails() {
     // Let's return the book with the properties which we need to render it.
     let { book } = this.props;
     // To prepare the cover, let's get the images first.
     let { imageLinks } = book;
-    // Let's get the thumbnail from imagelinks.
-    const { thumbnail, smallThumbnail } = imageLinks;
+    // Let's get the thumbnail from image links.
+    const { thumbnail, smallThumbnail } = imageLinks !== undefined ? imageLinks : {};
     // Let' decide which thumbnail to show. We will use normal thumbnail but if its not there then let's just use smallThumbnail.
     let bookThumbnail = thumbnail !== '' ? thumbnail : smallThumbnail;
     // Let's prepare book cover.
@@ -22,15 +27,23 @@ class Book extends Component {
     };
     return {
       title: book.title,
-      authors: book.authors,
+      authors: book.authors !== undefined ? book.authors : [],
       cover: bookCover,
       shelf: book.shelf
     }
   }
 
+  /**
+   * @description Handle the shelf change for the book.
+   * @param {string} updatedShelf - The updated shelf of the book.
+   */
   handleShelfChange = (updatedShelf) => {
     const { handleShelfUpdate, book } = this.props;
-    handleShelfUpdate(book.id, updatedShelf)
+    // Before notifying this change to App.js, let's update this bookshelf change to BE.
+    BooksAPI.update(book, updatedShelf)
+      .then(() => {
+        handleShelfUpdate(book, updatedShelf)
+      });
   };
 
   render() {
@@ -44,7 +57,7 @@ class Book extends Component {
             <div className="book-cover" style={bookDetails.cover}>
             </div>
             {/* Rendering book shelf changer. */}
-            <BookShelfChanger currentShelf = {bookDetails.shelf} onShelfChange={this.handleShelfChange}/>
+            <BookShelfChanger currentShelf={bookDetails.shelf} onShelfChange={this.handleShelfChange}/>
           </div>
           {/* Rendering book title */}
           <div className="book-title">{bookDetails.title}</div>

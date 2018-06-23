@@ -4,6 +4,10 @@ import PropTypes from 'prop-types'
 
 class Bookshelves extends Component {
 
+  /**
+   * @description Filters the books for the required shelf.
+   * @param {string} shelfId
+   */
   getBooksForShelf(shelfId) {
     // Let's return books which belongs to that shelf.
     return this.props.books.filter((book) => book.shelf === shelfId)
@@ -28,7 +32,6 @@ Bookshelves.propTypes = {
   bookshelves: PropTypes.array.isRequired,
   books: PropTypes.array.isRequired,
   handleShelfUpdate: PropTypes.func.isRequired
-
 };
 
 export default Bookshelves

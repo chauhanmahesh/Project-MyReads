@@ -15,7 +15,9 @@ class Bookshelf extends Component {
               {bookshelf.emptyMessage}
             </div>
           ) : (
-            <Books books={books} handleShelfUpdate={handleShelfUpdate}/>
+            <div className="bookshelf-books">
+              <Books books={books} handleShelfUpdate={handleShelfUpdate}/>
+            </div>
           )
         }
       </div>

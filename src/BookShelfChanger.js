@@ -15,6 +15,10 @@ class BookShelfChanger extends Component {
     }
   }
 
+  /**
+   * @description Handle the shelf change for the book.
+   * @param {Object} event
+   */
   handleShelfChange = (event) => {
     event.preventDefault();
     // Let's update the shelf so that we can show correctly in the BookShelfChanger that which shelf is currently selected.

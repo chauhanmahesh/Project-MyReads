@@ -1,13 +1,12 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Book from './Book'
 import PropTypes from "prop-types";
 
-const Books = (props) => {
+class Books extends Component {
 
-  const { books, handleShelfUpdate } = props;
-
-  return (
-    <div className="bookshelf-books">
+  render() {
+    const { books, handleShelfUpdate } = this.props;
+    return (
       <ol className="books-grid">
         {
           books.map((book) => (
@@ -15,10 +14,10 @@ const Books = (props) => {
           ))
         }
       </ol>
-    </div>
-  )
+    )
+  }
 
-};
+}
 
 // Defining propTypes.
 Books.propTypes = {
